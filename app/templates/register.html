@@ -1,0 +1,99 @@
+{% extends 'base.html' %}
+
+
+{% block main %}
+    <h2 class="mb-4">User Registration</h2>
+
+    {% if messages %}
+        <div class="alert alert-success">
+            {% for message in messages %}
+                <li>{{ message }}</li>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    {% if form.non_field_errors %}
+        <div class="alert alert-danger">
+            {% for error in form.non_field_errors %}
+                {{ error }}
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        <div class="mb-3">
+            {{ form.phone_num.label_tag }}
+            {{ form.phone_num }}
+
+            {% if form.phone_num.errors %}
+                <div class="alert alert-warning alert-dismissible">
+                    {{ form.phone_num.errors }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            {% endif %}
+        </div>
+
+        <div class="mb-3">
+            {{ form.email.label_tag }}
+            {{ form.email }}
+
+            {% if form.email.errors %}
+                <div class="alert alert-warning alert-dismissible">
+                    {{ form.email.errors }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            {% endif %}
+        </div>
+
+        <div class="row">
+            <div class="mb-3 col-md-4">
+                {{ form.first_name.label_tag }}
+                {{ form.first_name }}
+            </div>
+    
+    
+            <div class="mb-3 col-md-4">
+                {{ form.last_name.label_tag }}
+                {{ form.last_name }}
+            </div>
+    
+    
+            <div class="mb-3 col-md-4">
+                {{ form.profile_img.label_tag }}
+                {{ form.profile_img }}
+            </div>
+        </div>
+
+
+        <div class="mb-3">
+            {{ form.password1.label_tag }}
+            {{ form.password1 }}
+    
+            {% if form.password1.errors %}
+                <div class="alert alert-danger alert-dismissible" role="alert">
+                    {{ form.password1.errors.as_text }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            {% endif %}
+        </div>
+
+        <div class="mb-3">
+            {{ form.password2.label_tag }}
+            {{ form.password2 }}
+
+            {% if form.password2.errors %}
+                <div class="alert alert-danger alert-dismissible" role="alert">
+                    {{ form.password2.errors.as_text }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            {% endif %}
+        </div>
+
+
+        <button type="submit" class="btn btn-primary">Register</button>
+    </form>
+
+    <p class="mt-3">Already have an account? <a href="">Login</a></p>
+{% endblock %}
